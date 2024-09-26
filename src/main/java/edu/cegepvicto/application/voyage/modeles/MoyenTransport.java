@@ -1,4 +1,4 @@
-package edu.cegepvicto.application;
+package edu.cegepvicto.application.voyage.modeles;
 
 public class MoyenTransport {
 

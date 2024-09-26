@@ -17,19 +17,18 @@ public abstract class ControleurAbstrait {
         this.contexte = contexte;
     }
 
-    protected VueAbstraite RendreVue(String nomVue, HashMap<String, Object> parametres) {
+    protected void rendreVue(String nomVue, HashMap<String, Object> parametres) {
         try {
-            return (VueAbstraite) Class.forName(nomVue).getConstructor().newInstance();
+            VueAbstraite vue = (VueAbstraite) Class.forName(nomVue).getConstructor(Contexte.class).newInstance(contexte);
+            vue.afficher(parametres);
 
         } catch (ClassNotFoundException classeException) {
-
+            classeException.printStackTrace();
         } catch (NoSuchMethodException constructeurException) {
-
+            constructeurException.printStackTrace();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException initialisationException) {
-
+            initialisationException.printStackTrace();
         }
-
-        return null;
     }
 
 }

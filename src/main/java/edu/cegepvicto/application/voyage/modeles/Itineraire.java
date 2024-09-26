@@ -1,4 +1,4 @@
-package edu.cegepvicto.application;
+package edu.cegepvicto.application.voyage.modeles;
 
 import java.util.ArrayList;
 import java.util.List;

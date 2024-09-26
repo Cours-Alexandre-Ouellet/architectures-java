@@ -27,7 +27,7 @@ public class LocalisateurService {
      * @param serviceAObtenir la classe du service à créer ou obtenir.
      * @return l'instance du service.
      */
-    public IService obtenirService(Class<IService> serviceAObtenir) {
+    public IService obtenirService(Class<? extends IService> serviceAObtenir) {
 
         // Recherche le service s'il a déjà été initialisé
         for(IService service : services) {
@@ -39,7 +39,7 @@ public class LocalisateurService {
         // Initialise le service
         try {
             IService service = serviceAObtenir.getConstructor().newInstance();
-            service.initialiser();
+            service.initialiser(this);
 
             services.add(service);
 
