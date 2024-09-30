@@ -1,14 +1,16 @@
 package edu.cegepvicto.application.voyage.vues;
 
-import edu.cegepvicto.application.services.IItineraireDAO;
+import edu.cegepvicto.application.services.StringUtilService;
 import edu.cegepvicto.mvc.Contexte;
 import edu.cegepvicto.mvc.VueAbstraite;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
+@SuppressWarnings("unused")
 public class VueMenuVoyage extends VueAbstraite {
 
+    @SuppressWarnings("unused")
     public VueMenuVoyage(Contexte contexte) {
         super(contexte);
     }
@@ -18,7 +20,8 @@ public class VueMenuVoyage extends VueAbstraite {
 
         boolean saisieValide;
         Scanner lecteur = new Scanner(System.in);
-
+        StringUtilService stringService =
+                (StringUtilService) contexte.getLocalisateurService().obtenirService(StringUtilService.class);
 
         do {
             try {
@@ -32,7 +35,7 @@ public class VueMenuVoyage extends VueAbstraite {
 
                 String saisie = lecteur.nextLine();
 
-                if (estEntier(saisie)) {
+                if (stringService.estEntier(saisie)) {
                     int valeur = Integer.parseInt(saisie);
 
                     switch (valeur) {
@@ -48,9 +51,8 @@ public class VueMenuVoyage extends VueAbstraite {
                         default:
                             throw new Exception("La valeur saisie ne correspond pas à une option");
                     }
-                } else if (saisie.charAt(0) != 'Q') {
+                } else if (!stringService.verifierCaractere(saisie, 'Q')) {
                     throw new Exception("La valeur saisie ne correspond pas à une option");
-
                 }
 
             } catch (Exception exception) {
@@ -60,13 +62,6 @@ public class VueMenuVoyage extends VueAbstraite {
         } while (!saisieValide);
     }
 
-    private boolean estEntier(String saisie) {
-        try {
-            Integer.parseInt(saisie);
-            return true;
-        } catch (NumberFormatException exception) {
-            return false;
-        }
-    }
+
 
 }

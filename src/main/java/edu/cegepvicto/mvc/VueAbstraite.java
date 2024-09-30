@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public abstract class VueAbstraite {
 
-    private Contexte contexte;
+    protected Contexte contexte;
 
     public VueAbstraite(Contexte contexte) {
         this.contexte = contexte;
@@ -17,7 +17,7 @@ public abstract class VueAbstraite {
     public void rediriger(String nomControleur, String nomMethode, HashMap<String, Object> parametres) {
         try {
             ControleurAbstrait controleur = (ControleurAbstrait) Class.forName(nomControleur).
-            getConstructor(Contexte.class).newInstance();
+            getConstructor(Contexte.class).newInstance(contexte);
 
             Method methode = controleur.getClass().getMethod(nomMethode, HashMap.class);
             methode.invoke(controleur, parametres);

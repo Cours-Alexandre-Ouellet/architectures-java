@@ -17,13 +17,13 @@ application {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+
+    implementation("com.mysql:mysql-connector-j:8.0.33")
 }
 
-/*tasks {
-    run {
-        standardInput = System.`in`
-    }
-}*/
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
+}
 
 tasks.test {
     useJUnitPlatform()
