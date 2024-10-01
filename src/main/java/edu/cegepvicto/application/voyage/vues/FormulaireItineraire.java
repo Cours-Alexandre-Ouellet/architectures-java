@@ -26,27 +26,29 @@ public class FormulaireItineraire extends VueAbstraite {
 
         System.out.println("Saisie d'un nouvel itinéaire\n=======================");
 
+        System.out.println(parametres.get("message"));
+
         try {
             // Affichage du formulaire
             Destination depart = (Destination) consoleService.choisirListe("Choisissez la destination de depart.",
-                    (ArrayList<Object>) parametres.get("Destinations"));
+                    (ArrayList<Object>) parametres.get("destinations"));
 
             Destination arrivee = (Destination) consoleService.choisirListe("Choisissez la destination d'arrivée.",
-                    (ArrayList<Object>) parametres.get("Destinations"));
+                    (ArrayList<Object>) parametres.get("destinations"));
 
             MoyenTransport moyenTransport  = (MoyenTransport) consoleService.choisirListe("Choisissez le moyen de transport " +
                             "que vous voulez employer.",
-                    (ArrayList<Object>) parametres.get("Moyens de transport"));
+                    (ArrayList<Object>) parametres.get("moyensTransport"));
 
             // Création des paramètres de retour
             HashMap<String, Object> parametresControleur = new HashMap<>();
 
-            parametresControleur.put("Depart", depart);
-            parametresControleur.put("Arrivee", arrivee);
-            parametresControleur.put("MoyenTransport", moyenTransport);
+            parametresControleur.put("depart", depart);
+            parametresControleur.put("arrivee", arrivee);
+            parametresControleur.put("moyenTransport", moyenTransport);
 
             // Appel du contrôleur
-            rediriger("edu.cegepvicto.application.voyage.ControleurVoyage", "creeItineraire",
+            rediriger("edu.cegepvicto.application.voyage.ControleurVoyage", "enregistrerItineraire",
                     parametresControleur);
 
         } catch (InterruptionSaisieException interruptionException) {

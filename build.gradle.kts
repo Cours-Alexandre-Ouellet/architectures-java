@@ -21,6 +21,7 @@ dependencies {
     implementation("com.mysql:mysql-connector-j:8.0.33")
 }
 
+
 tasks.named<JavaExec>("run") {
     standardInput = System.`in`
 }

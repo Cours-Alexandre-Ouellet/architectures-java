@@ -4,6 +4,9 @@ import edu.cegepvicto.application.voyage.modeles.Destination;
 
 import java.util.ArrayList;
 
+/**
+ * DAO de base pour la gestion des destinations disponibles dans le système.
+ */
 public abstract class DestinationDAO extends DAOGenerique<Destination> {
 
     /**
@@ -25,6 +28,6 @@ public abstract class DestinationDAO extends DAOGenerique<Destination> {
      * Charge toutes les destinations de la base de données
      * @return la liste de tous les destinations
      */
-    public abstract ArrayList<Destination> chargerTout();
+    public abstract ArrayList<Destination> chargerTout() throws Exception;
 
 }

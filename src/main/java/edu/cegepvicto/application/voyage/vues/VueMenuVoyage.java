@@ -23,6 +23,11 @@ public class VueMenuVoyage extends VueAbstraite {
         StringUtilService stringService =
                 (StringUtilService) contexte.getLocalisateurService().obtenirService(StringUtilService.class);
 
+        String message = (String) parametres.get("message");
+        if(message != null) {
+            System.out.println(message);
+        }
+
         do {
             try {
                 saisieValide = true;
@@ -42,16 +47,19 @@ public class VueMenuVoyage extends VueAbstraite {
                         case 1:
                             rediriger("edu.cegepvicto.application.voyage.ControleurVoyage",
                                     "creeItineraire", null);
+                            break;
                         case 2:
                             rediriger("edu.cegepvicto.application.voyage.ControleurVoyage",
                                     "ajouterDeplacement", null);
+                            break;
                         case 3:
                             rediriger("edu.cegepvicto.application.voyage.ControleurVoyage",
-                                    "afficherItineraire", null);
+                                    "detailItineraire", null);
+                            break;
                         default:
                             throw new Exception("La valeur saisie ne correspond pas à une option");
                     }
-                } else if (!stringService.verifierCaractere(saisie, 'Q')) {
+                } else if (!stringService.verifierCaractere(saisie, 'Q', true)) {
                     throw new Exception("La valeur saisie ne correspond pas à une option");
                 }
 

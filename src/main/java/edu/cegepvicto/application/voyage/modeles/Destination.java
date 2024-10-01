@@ -24,4 +24,13 @@ public class Destination {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Destination{" +
+                "ville='" + ville + '\'' +
+                ", region='" + region + '\'' +
+                ", pays='" + pays + '\'' +
+                '}';
+    }
 }

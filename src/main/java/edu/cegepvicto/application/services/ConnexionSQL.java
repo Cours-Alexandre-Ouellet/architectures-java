@@ -1,4 +1,4 @@
-package edu.cegepvicto.application.dummy;
+package edu.cegepvicto.application.services;
 
 import edu.cegepvicto.localisateurservice.IService;
 import edu.cegepvicto.localisateurservice.LocalisateurService;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Émule le fonctionnement d'une base de données SQL
+ * Gère la connexion à une base de données SQL
  */
 public class ConnexionSQL implements IService {
 
@@ -24,7 +24,7 @@ public class ConnexionSQL implements IService {
     /**
      * Hôte de la BD
      */
-    private final String HOTE = "jdbc:mysql://127.0.0.1:3306/itineraire";
+    private final String HOTE = "jdbc:mysql://127.0.0.1:3306/voyage";
 
     /**
      * Nom de l'utilisateur

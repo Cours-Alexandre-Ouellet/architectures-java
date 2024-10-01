@@ -6,9 +6,9 @@ public class MoyenTransport {
 
     private String nom;
 
-    private float vitesseMoyenne;
+    private int vitesseMoyenne;
 
-    public MoyenTransport(int id, String nom, float vitesseMoyenne) {
+    public MoyenTransport(int id, String nom, int vitesseMoyenne) {
         this.id = id;
         this.nom = nom;
         this.vitesseMoyenne = vitesseMoyenne;
@@ -20,5 +20,14 @@ public class MoyenTransport {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "MoyenTransport{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", vitesseMoyenne=" + vitesseMoyenne +
+                '}';
     }
 }

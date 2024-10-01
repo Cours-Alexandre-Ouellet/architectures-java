@@ -17,52 +17,79 @@ public class ControleurVoyage extends ControleurAbstrait {
     }
 
     public void menuVoyage(HashMap<String, Object> parametres) {
-        rendreVue("edu.cegepvicto.application.voyage.vues.VueMenuVoyage", null);
+        rendreVue("edu.cegepvicto.application.voyage.vues.VueMenuVoyage", new HashMap<>());
     }
 
-    @SuppressWarnings("Appelée par réflexivité")
+    @SuppressWarnings("unused")
     public void creeItineraire(HashMap<String, Object> parametres) {
 
         // Premier affichage
-        if (parametres == null) {
-            HashMap<String, Object> parametresVue =new HashMap<>();
 
-            try {
-                ArrayList<Destination> destinations = ((DestinationDAO) contexte.getLocalisateurService().obtenirService(DestinationDAO_SQL.class)).chargerTout();
-                ArrayList<MoyenTransport> moyensTransport = ((MoyenTransportDAO) contexte.getLocalisateurService().obtenirService(MoyenTransportDAO_SQL.class)).chargerTout();
+        HashMap<String, Object> parametresVue =new HashMap<>();
 
-                parametresVue.put("destinations", destinations);
-                parametresVue.put("moyensTransport", moyensTransport);
-            } catch (Exception exception) {
-                parametresVue.put("message", exception.getMessage());
-            }
+        try {
+            ArrayList<Destination> destinations = ((DestinationDAO) contexte.getLocalisateurService().obtenirService(DestinationDAO_SQL.class)).chargerTout();
+            ArrayList<MoyenTransport> moyensTransport = ((MoyenTransportDAO) contexte.getLocalisateurService().obtenirService(MoyenTransportDAO_SQL.class)).chargerTout();
 
-            rendreVue("edu.cegepvicto.application.voyage.vues.FormulaireItineraire", parametresVue);
+            parametresVue.put("destinations", destinations);
+            parametresVue.put("moyensTransport", moyensTransport);
+        } catch (Exception exception) {
+            parametresVue.put("message", exception.getMessage());
         }
 
-        // Sinon on enregistre le formulaire
+        rendreVue("edu.cegepvicto.application.voyage.vues.FormulaireItineraire", parametresVue);
+    }
 
-        Destination depart = (Destination) parametres.get("Depart");
-        Destination arrivee = (Destination) parametres.get("Arrivee");
-        MoyenTransport moyenTransport = (MoyenTransport) parametres.get("MoyenTransport");
+    public void enregistrerItineraire(HashMap<String, Object> parametres){
+
+        Destination depart = (Destination) parametres.get("depart");
+        Destination arrivee = (Destination) parametres.get("arrivee");
+        MoyenTransport moyenTransport = (MoyenTransport) parametres.get("moyenTransport");
 
         if(depart == null || arrivee == null || moyenTransport == null) {
             // Erreur, paramètre null
         }
+
+        HashMap<String, Object> parametresVue = new HashMap<>();
 
         try {
             Itineraire itineraire = new Itineraire(depart, arrivee, moyenTransport);
             ItineraireDAO daoItineraire = (ItineraireDAO) contexte.getLocalisateurService().obtenirService(ItineraireDAO_SQL.class);
 
             daoItineraire.enregistrer(itineraire);
-            // rendreVue : succès
+
+            parametresVue.put("message", "Itineraire enregistre avec succes.");
+            rendreVue("edu.cegepvicto.application.voyage.vues.VueMenuVoyage", parametresVue);
         } catch (Exception exception) {
-            // rendreVue : échec
+            parametresVue.put("message", exception.getMessage());
+            rendreVue("edu.cegepvicto.application.voyage.vues.VueMenuVoyage", parametresVue);
         }
     }
 
     public void ajouterDeplacement(HashMap<String, Object> parametres) {
 
     }
+
+    /**
+     * Permet de sélectionner un itineraire parmi la liste des itinéraires disponibles
+     * @param parametres
+     */
+    @SuppressWarnings("unused")
+    public void detailItineraire(HashMap<String, Object> parametres) {
+        HashMap<String, Object> parametresVue = new HashMap<>();
+        ItineraireDAO itineraireDAO = (ItineraireDAO) contexte.getLocalisateurService().obtenirService(ItineraireDAO_SQL.class);
+
+        try {
+            parametresVue.put("itineraires", itineraireDAO.chargerTout());
+        } catch (Exception exception) {
+            parametresVue.put("message", exception.getMessage());
+        }
+
+        rendreVue("edu.cegepvicto.application.voyage.vues.DetailItineraire", parametresVue);
+    }
+
+
+
+
 
 }

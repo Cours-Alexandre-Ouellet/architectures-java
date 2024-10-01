@@ -2,6 +2,11 @@ package edu.cegepvicto.application.services;
 
 import java.util.ArrayList;
 
+/**
+ * Gère quelques méthodes de haut niveau que toutes les DAO du système se doivent de définir.
+ * Permet aussi d'accéder au identifiant unique (id) des enregistrements.
+ * @param <T> le type de donnée géré par la DAO spécialisée.
+ */
 public abstract class DAOGenerique<T> {
 
     /**

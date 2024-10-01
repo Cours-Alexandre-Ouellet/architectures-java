@@ -5,6 +5,9 @@ import edu.cegepvicto.application.voyage.modeles.MoyenTransport;
 
 import java.util.ArrayList;
 
+/**
+ * Gestionnaire des données pour les moyens de transport
+ */
 public abstract class MoyenTransportDAO extends DAOGenerique<MoyenTransport> {
 
     /**
