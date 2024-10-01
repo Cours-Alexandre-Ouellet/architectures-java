@@ -4,6 +4,7 @@ import edu.cegepvicto.application.services.InterruptionSaisieException;
 import edu.cegepvicto.application.services.SaisieConsoleService;
 import edu.cegepvicto.application.voyage.modeles.Destination;
 import edu.cegepvicto.application.voyage.modeles.MoyenTransport;
+import edu.cegepvicto.mvc.AppelSysteme;
 import edu.cegepvicto.mvc.Contexte;
 import edu.cegepvicto.mvc.VueAbstraite;
 
@@ -11,16 +12,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+/**
+ * Crée un nouveau formulaire pour ajouter des itinéraires de voyage.
+ */
 @SuppressWarnings("unused")
 public class FormulaireItineraire extends VueAbstraite {
 
+    /**
+     * Constructeur pour créer un nouveau formulaire.
+     * @param contexte le contexte d'exécution de l'application.
+     */
     @SuppressWarnings("unused")
     public FormulaireItineraire(Contexte contexte) {
         super(contexte);
     }
 
+    /**
+     * Affiche le formulaire pour saisir un nouvel itinéraire.
+     * @param parametres les paramètres de la vue.
+     * @return le prochain appel à faire au système.
+     */
     @Override
-    public void afficher(HashMap<String, Object> parametres) {
+    public AppelSysteme afficher(HashMap<String, Object> parametres) {
         SaisieConsoleService consoleService = (SaisieConsoleService) contexte.getLocalisateurService().
                 obtenirService(SaisieConsoleService.class);
 
@@ -48,12 +61,12 @@ public class FormulaireItineraire extends VueAbstraite {
             parametresControleur.put("moyenTransport", moyenTransport);
 
             // Appel du contrôleur
-            rediriger("edu.cegepvicto.application.voyage.ControleurVoyage", "enregistrerItineraire",
+            return rediriger("edu.cegepvicto.application.voyage.ControleurVoyage", "enregistrerItineraire",
                     parametresControleur);
 
         } catch (InterruptionSaisieException interruptionException) {
             System.out.println(interruptionException.getMessage());
-            rediriger("edu.cegepvicto.application.voyage.ControleurVoyage", "menuVoyage",
+            return rediriger("edu.cegepvicto.application.voyage.ControleurVoyage", "menuVoyage",
                     null);
         }
     }

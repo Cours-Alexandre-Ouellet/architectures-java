@@ -14,7 +14,7 @@ public class SaisieConsoleService implements IService {
     /**
      * Caractère d'échappement
      */
-    private final int ESCAPE_CHAR = 33;
+    private final int CARACTERE_QUITTER = 35;
 
     /**
      * Nombre d'éléments présentés en cas d'affichage multipage
@@ -48,10 +48,10 @@ public class SaisieConsoleService implements IService {
      * @throws InterruptionSaisieException une demande d'interruption a été formulée.
      */
     public String saisirChaine(String message) throws InterruptionSaisieException {
-        System.out.println(message + " [appuyez sur ESC + ENTER pour quitter]");
+        System.out.println(message + " [appuyez sur # + ENTER pour quitter]");
         String chaine = lecteur.nextLine();
 
-        if(chaine.length() > 1 && chaine.charAt(0) == ESCAPE_CHAR) {
+        if(chaine.length() > 0 && chaine.charAt(0) == CARACTERE_QUITTER) {
             throw new InterruptionSaisieException("Utilisateur demande de quitter");
         }
 

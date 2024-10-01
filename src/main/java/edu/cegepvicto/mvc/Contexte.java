@@ -7,6 +7,9 @@ import edu.cegepvicto.localisateurservice.LocalisateurService;
  */
 public class Contexte {
 
+    /**
+     * Référence vers le localisateur de services.
+     */
     private final LocalisateurService localisateurService;
 
     /**
@@ -16,6 +19,10 @@ public class Contexte {
         localisateurService = new LocalisateurService();
     }
 
+    /**
+     * Accesseur du localisateur de services.
+     * @return le localisateur de service de l'application.
+     */
     public LocalisateurService getLocalisateurService() {
         return localisateurService;
     }
